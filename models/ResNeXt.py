@@ -45,20 +45,19 @@ class ResNeXt(nn.Module):
         super(ResNeXt, self).__init__()
         self.cardinality = cardinality
         self.width = width
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=1, bias=False)
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, bias=False)
         self.bn1 = nn.BatchNorm2d(64)
-        self.layer1 = self.make_layer(ResidualXtBlock, in_channels=64, out_channels=256,  num_blocks=3, stride=1) 
-        self.layer2 = self.make_layer(ResidualXtBlock, in_channels=256, out_channels=512,  num_blocks=3, stride=2) 
-        self.layer3 = self.make_layer(ResidualXtBlock, in_channels=512, out_channels=1024,  num_blocks=3, stride=2) 
+        self.layer1 = self.make_layer(ResidualXtBlock, in_channels=64, width=64,  out_channels=256,  num_blocks=3, stride=1)
+        self.layer2 = self.make_layer(ResidualXtBlock, in_channels=256, width=128, out_channels=512,  num_blocks=3, stride=2) 
+        self.layer3 = self.make_layer(ResidualXtBlock, in_channels=512, width=256, out_channels=1024,  num_blocks=3, stride=2) 
         self.fc = nn.Linear(1024, num_classes)
 
-    def make_layer(self, block, in_channels, out_channels, num_blocks, stride):
+
+    def make_layer(self, block, in_channels, width, out_channels, num_blocks, stride):
         strides = [stride] + [1] * (num_blocks - 1)   #if num_blocks = 2, stride=2, strides = [2,1] (reduce dim at first block)
         layers = []
-        self.width = in_channels // 2
         for stride in strides:
-            layers.append(block(in_channels, out_channels, stride, self.cardinality, self.width))
-            self.width *= 2
+            layers.append(block(in_channels, out_channels, stride, self.cardinality, width))
             in_channels = out_channels
         return nn.Sequential(*layers)
 

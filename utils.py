@@ -5,6 +5,7 @@ import torchvision
 import torchvision.transforms as transforms
 
 from tqdm import tqdm
+import pickle
 import time
 import json
 import os
@@ -53,7 +54,7 @@ def train_model(net, train_loader, test_loader, criterion, optimizer, num_epochs
             optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9, weight_decay=5e-4)
         
         correct, total, sum_loss = 0, 0, 0
-        pbar = tqdm(total=len(train_loader), unit=' batches', ncols=80)
+        pbar = tqdm(total=len(train_loader), unit=' batches', ncols=100)
         pbar.set_description('Epoch %i/%i (Training)' % (epoch+1, num_epochs))
         for i, data in enumerate(train_loader):
             x, y = data
@@ -114,6 +115,7 @@ def train_model(net, train_loader, test_loader, criterion, optimizer, num_epochs
             model_info[model_name] = {'num_epochs':epoch, 'loss':(sum_loss/(i+1)), 'acc':(correct/total)}
             write_json(model_info)
             torch.save(net.state_dict(), './trained_model/%s.pkl'%(model_name))
+        save_hisotry(model_name, history)
     return history
 
 
@@ -152,15 +154,23 @@ def show_train_history(history, train, validation):
     plt.show()
     
 def save_hisotry(model_name, history):
-     with open('./trained_model/%histories.pkl', 'wb+') as f:
-            histories = pickle.load(f)
+     with open('./trained_model/histories.pkl', 'wb+') as f:
+            try:
+                histories = pickle.load(f)
+            except EOFError:
+                histories = {}  # or whatever you want
             histories[model_name] = history
             pickle.dump(histories, f)
     
 def load_history(model_name=None):
-    with open('./trained_model/%histories.pkl', 'rb') as f:
+    with open('./trained_model/histories.pkl', 'rb') as f:
         histories = pickle.load(f)
         if model_name is not None:
             return histories[model_name]
         else:
             return histories
+
+
+if __name__ == '__main__':
+    print(load_history(model_name='resnext'))
+

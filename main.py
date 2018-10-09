@@ -4,6 +4,7 @@ import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
 
+import pickle
 import argparse
 import time
 import json
@@ -14,6 +15,15 @@ from utils import *
 
 # All implemented models
 models = ['resnet', 'vgg16', 'googlenet', 'resnext']
+
+# Get user argument
+parser = argparse.ArgumentParser()
+parser.add_argument
+parser.add_argument("-model", "--model-name", help="model name", dest="model_name", default="resnext", choices=(tuple(models)))
+args = parser.parse_args()
+
+model_name = args.model_name
+
 
 # set up for first time
 if not os.path.isdir('trained_model'):
@@ -47,14 +57,9 @@ train_loader = torch.utils.data.DataLoader(trainset, batch_size=BATCH_SIZE, shuf
 testset = torchvision.datasets.CIFAR10(root='./data', train=False, download=True, transform=transform_test)
 test_loader = torch.utils.data.DataLoader(testset, batch_size=100, shuffle=False)
 
-# Create training
-parser = argparse.ArgumentParser()
-parser.add_argument
-parser.add_argument("-model", "--model-name", help="model name", dest="opt", default="resnext", choices=(tuple(*models)))
-args = parser.parse_args()
-
-model_name = args.model
+# Create Model
 net = create_model(model_name, USE_GPU)
+# net = load_model(model_name, USE_GPU)
 
 # set Loss and Optimizer
 LR = 0.1 
@@ -67,3 +72,4 @@ print('Bset Acc:', max(history['test_acc']))
 
 show_train_history(history, 'acc', 'test_acc')
 show_train_history(history, 'loss', 'test_loss')
+save_hisotry(model_name, history)
