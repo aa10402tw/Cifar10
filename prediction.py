@@ -15,8 +15,8 @@ from utils import *
 
 
 # All implemented models
-models = ['resnet', 'vgg16', 'googlenet', 'resnext']
-model_name = 'resnext'
+models = ['resnet', 'vgg16', 'googlenet', 'resnext', 'SimpleResNeXt_v1', 'SimpleResNeXt_v2']
+model_name = 'SimpleResNeXt_v2'
 
 # Cifar-10 labels
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -54,13 +54,16 @@ for i, img in enumerate(imgs):
 		x = x.cuda()
 	with torch.no_grad():
 		net.eval()
-		x = x.cuda()
+		if USE_GPU:
+			x = x.cuda()
 		out = net(x)
 		top_5_score, top_5_label = out.topk(5)
 		top_5 = [classes[l] for i, l in enumerate(top_5_label.data.cpu().numpy()[0])] 
 		title = [str(i+1) + ' ' + label + '\n' for i, label in enumerate(top_5)]
 		title = ''.join(title)
 		plt.subplot(2, 5, i+1), plt.imshow(img), plt.title(title), plt.yticks([]), plt.xticks([])
+	if i > 10 :
+		break
 plt.show()
 
 
