@@ -14,7 +14,7 @@ For example, if you want to train SimpleResNeXt_v2 for 100 epochs, and start wit
 You can type as following:
 
 ```
-python main.py -model=SimpleResNeXt_v2 -n_epochs=100 =lr=0.1 
+python main.py -model=SimpleResNeXt_v2 -n_epochs=100 -lr=0.1 
 ```
 
 ote: learning rate will decay 0.05 for every epochs.
