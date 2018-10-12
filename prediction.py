@@ -9,6 +9,7 @@ import numpy as np
 import glob
 import cv2
 from PIL import Image
+import argparse
 
 from models import *
 from utils import *
@@ -16,7 +17,12 @@ from utils import *
 
 # All implemented models
 models = ['resnet', 'vgg16', 'googlenet', 'resnext', 'SimpleResNeXt_v1', 'SimpleResNeXt_v2']
-model_name = 'SimpleResNeXt_v2'
+parser = argparse.ArgumentParser()
+parser.add_argument
+parser.add_argument("-model", "--model-name", help="model name", dest="model_name", default='SimpleResNeXt_v1', choices=(tuple(models)))
+args = parser.parse_args()
+
+model_name = args.model_name
 
 # Cifar-10 labels
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')

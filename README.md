@@ -17,4 +17,12 @@ You can type as following:
 python main.py -model=SimpleResNeXt_v2 -n_epochs=100 -lr=0.1 
 ```
 
-ote: learning rate will decay 0.05 for every epochs.
+Note: learning rate will decay 0.05 for every epochs.
+
+## Prediction 
+
+Put the images you want to predict in the test_imgs folder, and choose which model you want to use:
+
+```
+python prediction.py -model=SimpleResNeXt_v2
+```
