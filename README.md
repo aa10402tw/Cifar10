@@ -1,6 +1,7 @@
 # Cifar10
 
-Implement of some CNN network and modify ResNeXt to make the parameters fewer, The modified model are called SimpleResNeXt_v1 and SimpleResNeXt_v2.
+Implement some CNN networks and modify ResNeXt to make the parameters fewer. 
+The modified models are called SimpleResNeXt_v1 and SimpleResNeXt_v2.
 
 SimpleResNeXt_v1 need only 9,834 parameters but can get about 74.69% top-1 accuracy, and 98.67% top-5 accuracy.
 
@@ -17,7 +18,7 @@ You can type as following:
 python main.py -model=SimpleResNeXt_v2 -n_epochs=100 -lr=0.1 
 ```
 
-Note: learning rate will decay 0.05 for every epochs.
+Note: learning rate will decay 0.05 for every epoch.
 
 ## Prediction 
 
