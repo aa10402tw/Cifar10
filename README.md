@@ -1,6 +1,6 @@
 # Cifar10
 
-Implement of some CNN network and modify some of them to make the parameters fewer.
+Implement of some CNN network and modify ResNeXt to make the parameters fewer, The modified model are called SimpleResNeXt_v1 and SimpleResNeXt_v2.
 
 SimpleResNeXt_v1 need only 9,834 parameters but can get about 74.69% top-1 accuracy, and 98.67% top-5 accuracy.
 
