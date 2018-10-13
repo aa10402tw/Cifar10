@@ -18,7 +18,6 @@ from utils import *
 # All implemented models
 models = ['resnet', 'vgg16', 'googlenet', 'resnext', 'SimpleResNeXt_v1', 'SimpleResNeXt_v2']
 parser = argparse.ArgumentParser()
-parser.add_argument
 parser.add_argument("-model", "--model-name", help="model name", dest="model_name", default='SimpleResNeXt_v1', choices=(tuple(models)))
 args = parser.parse_args()
 
