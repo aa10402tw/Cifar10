@@ -30,10 +30,6 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 # Use GPU or not
 USE_GPU = True if torch.cuda.is_available() else False
 
-# Batch size of train loader
-BATCH_SIZE = 128     
-     
-
 # Preprocessing
 transform_test = transforms.Compose([
     transforms.ToTensor(),
@@ -60,8 +56,6 @@ for i, img in enumerate(imgs):
 		x = x.cuda()
 	with torch.no_grad():
 		net.eval()
-		if USE_GPU:
-			x = x.cuda()
 		out = net(x)
 		top_5_score, top_5_label = out.topk(5)
 		top_5 = [classes[l] for i, l in enumerate(top_5_label.data.cpu().numpy()[0])] 
