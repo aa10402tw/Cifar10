@@ -4,10 +4,10 @@ Implement some CNN networks and modify ResNeXt to make the parameters fewer.
 
 The modified models are called **SimpleResNeXt_v1** and **SimpleResNeXt_v2**.
 
-|  model name |:# params:|:top-1 acc:|:top-5 acc:|
-| ------------- | ------------- | ------------- | ------------- |
-| SimpleResNeXt_v1 |:9,834:|:74.69%:|:98.67%:|
-| SimpleResNeXt_v1 |:850:|:51.59%:|:93.78%:|
+|  model name |# params|top-1 acc|top-5 acc|
+| :-------------: | :-------------: | :-------------: | :-------------: |
+| SimpleResNeXt_v1|9,834|74.69%|98.67%|
+| SimpleResNeXt_v1|850|51.59%|93.78%|
 
 ## How to Train
 
