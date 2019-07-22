@@ -1,6 +1,6 @@
 # Cifar10
 
-Implement some CNN networks and modify ResNeXt to make the as few as possible when the top-5 accuracy is above 90%. 
+Implement and modify some CNN networks to make number of parameters as few as possible when the top-5 accuracy is above 90%. 
 
 The modified models are called **SimpleResNeXt_v1** and **SimpleResNeXt_v2**.
 
