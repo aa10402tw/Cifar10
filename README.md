@@ -1,4 +1,4 @@
-# Cifar10
+# LightCNN-Cifar10
 
 Modify CNN networks to make the number of parameters as few as possible when the top-5 accuracy is above 90%. 
 
